@@ -6,7 +6,7 @@ function Block(height, numTransactions, totalGas, blockSize) {
 	if (document.visibilityState === "visible") {
 		Floatable.call(this);
 
-		var gasEth = Math.floor(totalGas / wei) + " ETH";
+		var gasEth = totalGas;
 		var blockSizeKB = blockSize + " bytes";
 
 		this.width = this.height = 250;
