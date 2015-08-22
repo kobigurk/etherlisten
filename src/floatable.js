@@ -60,7 +60,7 @@ Floatable.prototype.removeSelf = function() {
 	updateTargets.splice(updateTargets.indexOf(this), 1);
 };
 
-Floatable.prototype.addImage = function(image, width, height) {
+Floatable.prototype.addImage = function(image, width, height, link) {
 	this.canvas = document.createElement('canvas');
 	this.image = image;
 	this.canvas.height = height;
@@ -71,7 +71,16 @@ Floatable.prototype.addImage = function(image, width, height) {
 	var ctx = this.canvas.getContext("2d");
 	ctx.drawImage(this.image, 0, 0, width - 1, height - 1);
 
-	this.div.appendChild(this.canvas);
+    if (link) {
+        this.aWrap = document.createElement("a");
+        this.aWrap.href = link;
+        this.aWrap.target = "_blank";
+        this.aWrap.style.textDecoration = "none";
+        this.div.appendChild(this.aWrap);
+        this.aWrap.appendChild(this.canvas);
+    } else {
+        this.div.appendChild(this.canvas);
+    }
 };
 
 Floatable.prototype.addText = function(text) {

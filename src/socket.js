@@ -16,6 +16,7 @@ TransactionSocket.init = function() {
 
 	if ('WebSocket' in window) {
 		var connection = new ReconnectingWebSocket('ws://listen.etherlisten.com:8085');
+//		var connection = new ReconnectingWebSocket('ws://127.0.0.1:8085');
 		TransactionSocket.connection = connection;
 
 		StatusBox.reconnecting("blockchain");
@@ -37,9 +38,7 @@ TransactionSocket.init = function() {
 			// Display the latest transaction so the user sees something.
 		};
 
-		connection.onclose = function() {
-			console.log('etherlisten-websocket: Connection closed');
-			if ($("#blockchainCheckBox").prop("checked"))
+		connection.onclose = function() { console.log('etherlisten-websocket: Connection closed'); if ($("#blockchainCheckBox").prop("checked"))
 				StatusBox.reconnecting("blockchain");
 			else
 				StatusBox.closed("blockchain");
@@ -63,11 +62,12 @@ TransactionSocket.init = function() {
                 var soundDonation = false;
 				var to = response.data.to;
                 var ethers = response.data.value / wei;
+                var hash = response.data.hash;
                 if (to == '0xeeeabc403337a8b7605a98a29cbac279199a7562') {
-                    new Transaction(ethers, true);
+                    new Transaction(ethers, true, hash);
                 } else {
                     setTimeout(function() {
-                        new Transaction(ethers);
+                        new Transaction(ethers, false, hash);
                     }, Math.random() * DELAY_CAP);
                 }
 
