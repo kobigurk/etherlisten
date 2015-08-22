@@ -24,12 +24,13 @@ rateboxGetRate = function() {
 
 $(document).ready(function() {
 	// Bitstamp websocket API
-	var pusher = new Pusher('de504dc5763aeef9ff52');
-	var channel = pusher.subscribe('live_trades');
-	channel.bind('trade', function(ticker) {
+	//var pusher = new Pusher('de504dc5763aeef9ff52');
+	//var channel = pusher.subscribe('live_trades');
+	/*channel.bind('trade', function(ticker) {
         $("#rate").html(parseFloat(ticker.price).toFixed(2));
         if (rateboxTimeout) clearTimeout(rateboxTimeout);
 	});
+    */
 });
 
 switchExchange = function(exchangeName) {
