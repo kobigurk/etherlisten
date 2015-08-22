@@ -3,6 +3,7 @@ var currentExchange;
 var ratebox_ms = 3000; // 3 second update interval
 
 rateboxGetRate = function() {
+    return;
 	if (currentExchange == "bitstamp") {
 		// Thanks to nyg for this trick - https://github.com/nyg/bitstamp-ticker/blob/master/bitstamp.js
 		var api_url = 'https://www.bitstamp.net/api/ticker/';
