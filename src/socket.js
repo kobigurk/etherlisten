@@ -15,7 +15,7 @@ TransactionSocket.init = function() {
 		TransactionSocket.connection.close();
 
 	if ('WebSocket' in window) {
-		var connection = new ReconnectingWebSocket('ws://www.etherlisten.com:8085');
+		var connection = new ReconnectingWebSocket('ws://listen.etherlisten.com:8085');
 		TransactionSocket.connection = connection;
 
 		StatusBox.reconnecting("blockchain");
