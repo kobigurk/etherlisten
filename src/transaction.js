@@ -6,7 +6,7 @@ function Transaction(bitcoins, highlight, currency, currencyName) {
 	if (document.visibilityState === "visible") {
 		Floatable.call(this);
 
-		this.area = bitcoins * 100 + 3000;
+		this.area = bitcoins * 20 + 3000;
 		this.width = this.height = Math.sqrt(this.area / Math.PI) * 2;
 
 		this.addImage(bubbleImage, this.width, this.height);
