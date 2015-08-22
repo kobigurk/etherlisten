@@ -9,7 +9,8 @@ function Transaction(bitcoins, highlight, hash, currency, currencyName) {
 		this.area = bitcoins * 20 + 3000;
 		this.width = this.height = Math.sqrt(this.area / Math.PI) * 2;
 
-		this.addImage(bubbleImage, this.width, this.height, 'http://frontier.ether.camp/transaction/' + hash.replace('0x',''));
+//		this.addImage(bubbleImage, this.width, this.height, 'http://frontier.ether.camp/transaction/' + hash.replace('0x',''));
+		this.addImage(bubbleImage, this.width, this.height);
 
 	
 		var bitcoinString = "&Xi;" + bitcoins.toFixed(2);
