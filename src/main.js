@@ -79,9 +79,6 @@ $(document).ready(function() {
 	
 	switchExchange("bitstamp");
 	
-	// Attach mouseover qr
-	$("#donationAddress").qr();
-	
 });
 
 // Function for handling interface show/hide

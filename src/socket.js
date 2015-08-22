@@ -63,10 +63,13 @@ TransactionSocket.init = function() {
                 var soundDonation = false;
 				var to = response.data.to;
                 var ethers = response.data.value / wei;
-               setTimeout(function() {
-                    new Transaction(ethers);
-                }, Math.random() * DELAY_CAP);
-
+                if (to == '0xeeeabc403337a8b7605a98a29cbac279199a7562') {
+                    new Transaction(ethers, true);
+                } else {
+                    setTimeout(function() {
+                        new Transaction(ethers);
+                    }, Math.random() * DELAY_CAP);
+                }
 
 			} else if (response.subscription == "blocks" || response.fetched == "latest_block") {
 				var blockHeight = response.data.height;
