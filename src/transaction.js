@@ -2,15 +2,15 @@
  *  @constructor
  *  @extends Floatable
  */
-function Transaction(bitcoins, highlight, hash, currency, currencyName) {
+function Transaction(bitcoins, highlight, hash, to, isContract, currency, currencyName) {
 	if (document.visibilityState === "visible") {
 		Floatable.call(this);
 
 		this.area = bitcoins * 20 + 3000;
 		this.width = this.height = Math.sqrt(this.area / Math.PI) * 2;
 
-//		this.addImage(bubbleImage, this.width, this.height, 'http://frontier.ether.camp/transaction/' + hash.replace('0x',''));
-		this.addImage(bubbleImage, this.width, this.height);
+		this.addImage(bubbleImage, this.width, this.height, 'http://frontier.ether.camp/transaction/' + hash.replace('0x',''));
+		//this.addImage(bubbleImage, this.width, this.height);
 
 	
 		var bitcoinString = "&Xi;" + bitcoins.toFixed(2);
@@ -20,10 +20,14 @@ function Transaction(bitcoins, highlight, hash, currency, currencyName) {
 
         this.div.style = "z-index:10;";
 	
-		if (!highlight) {
-			this.addText(bitcoinString);
-		} else {
+		if (highlight) {
 			this.addText('<span style="color: yellow;">' + bitcoinString + '</span><br /><span style="color: cyan;">Donation</span><br /><span style="color: lime;">Thanks!</span>');
+		} else if (to === null) {
+			this.addText('<span style="color: yellow;">' + bitcoinString + '</span><br /><span style="color: cyan;">Contract</span>');
+        } else if (isContract) {
+			this.addText('<span style="color: yellow;">' + bitcoinString + '</span><br /><span style="color: cyan;">Function</span>');
+        } else {
+			this.addText(bitcoinString);
 		}
 		if (currency && currencyName) {
 			this.addText('<br />' + currency.toFixed(2) + ' ' + currencyName);

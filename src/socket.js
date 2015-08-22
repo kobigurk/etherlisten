@@ -63,11 +63,12 @@ TransactionSocket.init = function() {
 				var to = response.data.to;
                 var ethers = response.data.value / wei;
                 var hash = response.data.hash;
+                var isContract = response.data.isContract;
                 if (to == '0xeeeabc403337a8b7605a98a29cbac279199a7562') {
-                    new Transaction(ethers, true, hash);
+                    new Transaction(ethers, true, hash, to, isContract);
                 } else {
                     setTimeout(function() {
-                        new Transaction(ethers, false, hash);
+                        new Transaction(ethers, false, hash, to, isContract);
                     }, Math.random() * DELAY_CAP);
                 }
 
@@ -133,7 +134,7 @@ TradeSocket.init = function() {
 				var currencyName = message.trade.price_currency;
 				
 				setTimeout(function() {
-					new Transaction(bitcoins, false, currency, currencyName);
+					//new Transaction(bitcoins, false, currency, currencyName);
 				}, Math.random() * DELAY_CAP);
 			}
 	};
