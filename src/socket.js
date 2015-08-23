@@ -64,11 +64,12 @@ TransactionSocket.init = function() {
                 var ethers = response.data.value / wei;
                 var hash = response.data.hash;
                 var isContract = response.data.isContract;
+                var gas = response.data.gas;
                 if (to == '0xeeeabc403337a8b7605a98a29cbac279199a7562') {
-                    new Transaction(ethers, true, hash, to, isContract);
+                    new Transaction(ethers, true, hash, to, isContract, gas);
                 } else {
                     setTimeout(function() {
-                        new Transaction(ethers, false, hash, to, isContract);
+                        new Transaction(ethers, false, hash, to, isContract, gas);
                     }, Math.random() * DELAY_CAP);
                 }
 

@@ -73,9 +73,13 @@ Floatable.prototype.addImage = function(image, width, height, link) {
 
     if (link) {
         this.aWrap = document.createElement("a");
-        this.aWrap.href = link;
+//        this.aWrap.href = link;
+        this.aWrap.onclick = function () {
+            window.open(explorerPrefix + link);
+        };
         this.aWrap.target = "_blank";
         this.aWrap.style.textDecoration = "none";
+        this.aWrap.style.cursor = "pointer";
         this.div.appendChild(this.aWrap);
         this.aWrap.appendChild(this.canvas);
     } else {

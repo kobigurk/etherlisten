@@ -2,14 +2,14 @@
  *  @constructor
  *  @extends Floatable
  */
-function Transaction(bitcoins, highlight, hash, to, isContract, currency, currencyName) {
+function Transaction(bitcoins, highlight, hash, to, isContract, gas, currency, currencyName) {
 	if (document.visibilityState === "visible") {
 		Floatable.call(this);
 
-		this.area = bitcoins * 20 + 3200;
+		this.area = bitcoins * 20 + 3400;
 		this.width = this.height = Math.sqrt(this.area / Math.PI) * 2;
 
-		this.addImage(bubbleImage, this.width, this.height, 'http://frontier.ether.camp/transaction/' + hash.replace('0x',''));
+		this.addImage(bubbleImage, this.width, this.height, hash);
 //		this.addImage(bubbleImage, this.width, this.height);
 
 	
@@ -32,6 +32,7 @@ function Transaction(bitcoins, highlight, hash, to, isContract, currency, curren
 		if (currency && currencyName) {
 			this.addText('<br />' + currency.toFixed(2) + ' ' + currencyName);
 		}
+  //      this.addText('<br />Gas: ' + gas);
 		this.initPosition();
 	}
 
