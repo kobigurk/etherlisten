@@ -55,7 +55,7 @@
             <div id="rateBox" style="width:400px;">
                 Clicking on a transaction bubble leads to a block explorer (might take a while to appear there).<br /><br />
                     Choose explorer:
-                    <select style="background:lightgray; border:none; border-radius:4px;" onchange="changeExplorer($(this).val());">
+                    <select id="explorer_select" style="background:lightgray; border:none; border-radius:4px;" onchange="changeExplorer($(this).val());">
                         <option value="http://frontier.ether.camp/transaction/">EtherCamp</option>
                         <option value="https://etherchain.org/tx/">EtherChain</option>
                     </select>
@@ -127,5 +127,8 @@
 				<span style="cursor: pointer; text-decoration: underline;"> (Click Here to Suppress this warning.) </span>
 			</p>
 		</div>
+        <script type="text/javascript">
+            changeExplorer($('#explorer_select').val());
+        </script>
 	</body>
 </html>
