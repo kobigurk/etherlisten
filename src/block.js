@@ -9,9 +9,11 @@ function Block(height, numTransactions, totalGas, blockSize) {
 		var gasEth = totalGas;
 		var blockSizeKB = blockSize + " bytes";
 
-		this.width = this.height = 250;
+		this.width = 250;
+        this.height = 1270/794 * this.width;
 
-		this.addImage(blockImage, this.width, this.height);
+		this.addImage(blockImage, this.width, this.height, 'block', height);
+        this.div.style.zIndex = 10;
 		this.addText("Block #" + height + "<br />Number of Transactions: " + numTransactions + "<br />Total Gas: " + gasEth + "<br />Block Size: " + blockSizeKB);
 		this.initPosition();
 	}

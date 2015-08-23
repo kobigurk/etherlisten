@@ -60,7 +60,7 @@ Floatable.prototype.removeSelf = function() {
 	updateTargets.splice(updateTargets.indexOf(this), 1);
 };
 
-Floatable.prototype.addImage = function(image, width, height, link) {
+Floatable.prototype.addImage = function(image, width, height, type, link) {
 	this.canvas = document.createElement('canvas');
 	this.image = image;
 	this.canvas.height = height;
@@ -75,7 +75,19 @@ Floatable.prototype.addImage = function(image, width, height, link) {
         this.aWrap = document.createElement("a");
 //        this.aWrap.href = link;
         this.aWrap.onclick = function () {
-            window.open(explorerPrefix + link);
+            if (type === 'tx') {
+                if (explorer == 'etherchain') {
+                    window.open('http://frontier.ether.camp/transaction/' + link);
+                } else {
+                    window.open('http://etherchain.org/tx/' + link);
+                }
+            } else {
+                if (explorer == 'ethercamp') {
+                    window.open('http://frontier.ether.camp/block/' + link);
+                } else {
+                    window.open('http://etherchain.org/block/' + link);
+                }
+            }
         };
         this.aWrap.ontouchstart = this.aWrap.onclick;
         this.aWrap.target = "_blank";

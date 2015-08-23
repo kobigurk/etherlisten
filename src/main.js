@@ -16,9 +16,9 @@ var updateTargets = [];
 
 // Preload images
 var bubbleImage = new Image();
-bubbleImage.src = "images/bubble.png";
+bubbleImage.src = "images/ethereum-icon.png";
 var blockImage = new Image();
-blockImage.src = "images/block.png";
+blockImage.src = "images/ethereum-icon.png";
 
 var debugSpawner;
 

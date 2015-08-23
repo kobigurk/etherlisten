@@ -24,9 +24,9 @@
 	  ga('create', 'UA-66637150-1', 'www.etherlisten.com');
 	  ga('send', 'pageview');
 
-      explorerPrefix = 'http://frontier.ether.camp/transaction/';
-      function changeExplorer(newPrefix) {
-          explorerPrefix = newPrefix;
+      explorer = 'etherchain';
+      function changeExplorer(newExplorer) {
+          explorer = newExplorer;
       }
 	</script>
 	</head>
@@ -53,11 +53,11 @@
 	
 			</div>
             <div id="rateBox" style="width:400px; max-width:20%;">
-                Clicking on a transaction bubble leads to a block explorer (might take a while to appear there).<br /><br />
+                Clicking on a bubble leads to a block explorer (might take a while to appear there).<br /><br />
                     Choose explorer:
                     <select id="explorer_select" style="background:lightgray; border:none; border-radius:4px;" onchange="changeExplorer($(this).val());">
-                        <option value="http://frontier.ether.camp/transaction/">EtherCamp</option>
-                        <option value="https://etherchain.org/tx/">EtherChain</option>
+                        <option value="ethercamp">EtherCamp</option>
+                        <option value="etherchain">EtherChain</option>
                     </select>
             </div>
 

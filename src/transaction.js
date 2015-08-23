@@ -6,10 +6,11 @@ function Transaction(bitcoins, highlight, hash, to, isContract, gas, currency, c
 	if (document.visibilityState === "visible") {
 		Floatable.call(this);
 
-		this.area = bitcoins * 20 + 3400;
-		this.width = this.height = Math.sqrt(this.area / Math.PI) * 2;
+		this.area = bitcoins * 20 + 2000;
+		this.width = Math.sqrt(this.area / Math.PI) * 2;
+        this.height = 1270/794 * this.width;
 
-		this.addImage(bubbleImage, this.width, this.height, hash);
+		this.addImage(bubbleImage, this.width, this.height, 'tx', hash);
 //		this.addImage(bubbleImage, this.width, this.height);
 
 	
