@@ -18,7 +18,7 @@ function Transaction(bitcoins, highlight, hash, to, isContract, gas, currency, c
 		if (bitcoinString == "&Xi;0.00")
             bitcoinString = "<&Xi;0.01";
 
-        this.div.style = "z-index:10;";
+        this.div.style.zIndex = 10;
 	
 		if (highlight) {
 			this.addText('<span style="color: yellow;">' + bitcoinString + '</span><br /><span style="color: cyan;">Donation</span><br /><span style="color: lime;">Thanks!</span>');
