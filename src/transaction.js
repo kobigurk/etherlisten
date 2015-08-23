@@ -6,11 +6,11 @@ function Transaction(bitcoins, highlight, hash, to, isContract, currency, curren
 	if (document.visibilityState === "visible") {
 		Floatable.call(this);
 
-		this.area = bitcoins * 20 + 3000;
+		this.area = bitcoins * 20 + 3200;
 		this.width = this.height = Math.sqrt(this.area / Math.PI) * 2;
 
-		this.addImage(bubbleImage, this.width, this.height, 'http://frontier.ether.camp/transaction/' + hash.replace('0x',''));
-		//this.addImage(bubbleImage, this.width, this.height);
+		//this.addImage(bubbleImage, this.width, this.height, 'http://frontier.ether.camp/transaction/' + hash.replace('0x',''));
+		this.addImage(bubbleImage, this.width, this.height);
 
 	
 		var bitcoinString = "&Xi;" + bitcoins.toFixed(2);
