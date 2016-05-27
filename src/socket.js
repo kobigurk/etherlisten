@@ -15,7 +15,8 @@ TransactionSocket.init = function() {
 		TransactionSocket.connection.close();
 
 	if ('WebSocket' in window) {
-		var connection = new ReconnectingWebSocket('ws://listen.etherlisten.com:8085');
+
+		var connection = new ReconnectingWebSocket('ws://listen.etherlisten.com:8546');
 //		var connection = new ReconnectingWebSocket('ws://127.0.0.1:8085');
 		TransactionSocket.connection = connection;
 
@@ -24,6 +25,9 @@ TransactionSocket.init = function() {
 		connection.onopen = function() {
 			console.log('etherlisten-websocket: Connection open!');
 			StatusBox.connected("blockchain");
+            connection.send(JSON.stringify({"id": 1, "method": "eth_subscribe", "params": ["newBlocks", {"includeTransactions": true, "transactionDetails": false}]}));
+            connection.send(JSON.stringify({"id": 2, "method": "eth_subscribe", "params": ["newPendingTransactions"]}));
+			/*
 			var newTransactions = {
 				"subscribe" : "transactions"
 			};
@@ -36,6 +40,7 @@ TransactionSocket.init = function() {
 				"fetch" : "latest_transaction"
 			}));
 			// Display the latest transaction so the user sees something.
+			*/
 		};
 
 		connection.onclose = function() { console.log('etherlisten-websocket: Connection closed'); if ($("#blockchainCheckBox").prop("checked"))
@@ -48,23 +53,31 @@ TransactionSocket.init = function() {
 			console.log('etherlisten-websocket: Connection Error: ' + JSON.stringify(error));
 		};
 
+        var blockFilterId;
+        var txFilterId;
+        var i = 0;
 		connection.onmessage = function(e) {
 			var response = JSON.parse(e.data);
-
-			// New Transaction
-			if (response.subscription == "transactions" || response.fetched == "latest_transaction") {
-				var transacted = response.data.value;
-
-				var bitcoins = transacted / wei;
-				//console.log("Transaction: " + bitcoins + " BTC");
+            if (response.id == 1) {
+                blockFilterId = response.result;
+                return;
+            }
+            if (response.id == 2) {
+                txFilterId = response.result;
+                return;
+            }
+            i = 3 + (i++) % 30000;
+            if (response.id > 2) {
+                var transaction = response.result;
+				var transacted = parseInt(transaction.value);
 
 				var donation = false;
                 var soundDonation = false;
-				var to = response.data.to;
-                var ethers = response.data.value / wei;
-                var hash = response.data.hash;
-                var isContract = response.data.isContract;
-                var gas = response.data.gas;
+				var to = transaction.to;
+                var ethers = transacted / wei;
+                var hash = transaction.hash;
+                var isContract = transaction.input != '0x';
+                var gas = parseInt(transaction.gas);
                 if (to == '0xeeeabc403337a8b7605a98a29cbac279199a7562') {
                     new Transaction(ethers, true, hash, to, isContract, gas);
                 } else {
@@ -72,19 +85,24 @@ TransactionSocket.init = function() {
                         new Transaction(ethers, false, hash, to, isContract, gas);
                     }, Math.random() * DELAY_CAP);
                 }
-
-			} else if (response.subscription == "blocks" || response.fetched == "latest_block") {
-				var blockHeight = response.data.height;
-				var transactions = response.data.transactions_count;
-				var volumeSent = response.data.total_gas;
-				var blockSize = response.data.size;
+                return;
+            }
+            if (response.params.subscription == blockFilterId) {
+				var blockHeight = parseInt(response.params.result.number);
+				var transactions = response.params.result.transactions.length;
+				var volumeSent = parseInt(response.params.result.gasUsed);
+				var blockSize = parseInt(response.params.result.size);
 				// Filter out the orphaned blocks.
 				if (blockHeight > lastBlockHeight) {
 					lastBlockHeight = blockHeight;
 					console.log("New Block");
 					new Block(blockHeight, transactions, volumeSent, blockSize);
 				}
-			}
+            }
+            if (response.params.subscription == txFilterId) {
+                var txHash = response.params.result;
+                connection.send(JSON.stringify({"id": i, "method": "eth_getTransactionByHash", "params": [txHash]}));
+            }
 
 		};
 	} else {
