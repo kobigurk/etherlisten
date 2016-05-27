@@ -27,7 +27,10 @@ EtherListen uses these libraries:
 
 EtherListen uses these APIs:
 
-* [etherlisten-websocket](https://github.com/kobigurk/etherlisten-websocket/) WebSocket API (For Transactions)
+[etherlisten-websocket](https://github.com/kobigurk/etherlisten-websocket/) <del> WebSocket API (For Transactions) </del>. Not anymore - proved too slow with the rising transaction rate.
+
+It now uses a custom compiled geth and its websocket interface: [etherlisten-geth](https://github.com/kobigurk/go-ethereum).
+
 
 ### License ###
 
