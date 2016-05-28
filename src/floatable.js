@@ -76,16 +76,20 @@ Floatable.prototype.addImage = function(image, width, height, type, link) {
 //        this.aWrap.href = link;
         this.aWrap.onclick = function () {
             if (type === 'tx') {
-                if (explorer == 'etherchain') {
+                if (explorer == 'ethercamp') {
                     window.open('http://frontier.ether.camp/transaction/' + link);
-                } else {
+                } else if (explorer == 'etherchain') {
                     window.open('http://etherchain.org/tx/' + link);
+                } else {
+                    window.open('http://etherscan.io/tx/' + link);
                 }
             } else {
                 if (explorer == 'ethercamp') {
                     window.open('http://frontier.ether.camp/block/' + link);
-                } else {
+                } else if (explorer == 'etherchain'){
                     window.open('http://etherchain.org/block/' + link);
+                } else {
+                    window.open('http://etherscan.io/block/' + link);
                 }
             }
         };

@@ -24,7 +24,7 @@
 	  ga('create', 'UA-66637150-1', 'www.etherlisten.com');
 	  ga('send', 'pageview');
 
-      explorer = 'etherchain';
+      explorer = 'ethercamp';
       function changeExplorer(newExplorer) {
           explorer = newExplorer;
       }
@@ -57,6 +57,7 @@
                     Choose explorer:
                     <select id="explorer_select" style="background:lightgray; border:none; border-radius:4px;" onchange="changeExplorer($(this).val());">
                         <option value="ethercamp">EtherCamp</option>
+                        <option value="etherscan">Etherscan</option>
                         <option value="etherchain">EtherChain</option>
                     </select>
             </div>
