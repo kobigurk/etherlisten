@@ -81,7 +81,7 @@ TransactionSocket.init = function() {
                 if (to == '0xeeeabc403337a8b7605a98a29cbac279199a7562') {
                     new Transaction(ethers, true, hash, to, isContract, gas);
                 } else if (to == '0xbb9bc244d798123fde783fcc1c72d3bb8c189413') {
-                    new Transaction(ethers, false, hash, to, isContract, gas, true);
+                    new Transaction(ethers, false, hash, to, isContract, gas, null, null, true);
                 } else {
                     setTimeout(function() {
                         new Transaction(ethers, false, hash, to, isContract, gas);
