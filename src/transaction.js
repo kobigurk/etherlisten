@@ -2,7 +2,7 @@
  *  @constructor
  *  @extends Floatable
  */
-function Transaction(bitcoins, highlight, hash, to, isContract, gas, currency, currencyName) {
+function Transaction(bitcoins, highlight, hash, to, isContract, gas, currency, currencyName, isDao) {
 	if (document.visibilityState === "visible") {
 		Floatable.call(this);
 
@@ -25,6 +25,9 @@ function Transaction(bitcoins, highlight, hash, to, isContract, gas, currency, c
 			this.addText('<span style="color: yellow;">' + bitcoinString + '</span><br /><span style="color: cyan;">Donation</span><br /><span style="color: lime;">Thanks!</span>');
 		} else if (to === null) {
 			this.addText('<span style="color: yellow;">' + bitcoinString + '</span><br /><span style="color: cyan;">Contract</span>');
+        } else if (isDao) {
+
+			this.addText('<span style="color: yellow;">' + bitcoinString + '</span><br /><span style="color: cyan;">TheDAO</span>');
         } else if (isContract) {
 			this.addText('<span style="color: yellow;">' + bitcoinString + '</span><br /><span style="color: cyan;">Function</span>');
         } else {
