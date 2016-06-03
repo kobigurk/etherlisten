@@ -6,7 +6,11 @@ function Transaction(bitcoins, highlight, hash, to, isContract, gas, currency, c
 	if (document.visibilityState === "visible") {
 		Floatable.call(this);
 
-		this.area = bitcoins * 20 + 2000;
+        if (isDao) {
+            this.area = (bitcoins/100) * 20 + 2000;
+        } else {
+            this.area = bitcoins * 20 + 2000;
+        }
 		this.width = Math.sqrt(this.area / Math.PI) * 2;
         this.height = 1270/794 * this.width;
 
