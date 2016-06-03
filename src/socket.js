@@ -81,6 +81,10 @@ TransactionSocket.init = function() {
                 if (to == '0xeeeabc403337a8b7605a98a29cbac279199a7562') {
                     new Transaction(ethers, true, hash, to, isContract, gas);
                 } else if (to == '0xbb9bc244d798123fde783fcc1c72d3bb8c189413') {
+                    //TheDAO
+                    if (transaction.data.indexOf('0xa9059cbb') === 0) {
+                        ethers = parseInt(transaction.data.slice(74), 16) / 10000000000000000;
+                    }
                     new Transaction(ethers, false, hash, to, isContract, gas, null, null, true);
                 } else {
                     setTimeout(function() {
