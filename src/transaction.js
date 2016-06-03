@@ -20,7 +20,7 @@ function Transaction(bitcoins, highlight, hash, to, isContract, gas, currency, c
             bitcoinString = "<&Xi;0.01";
 
         if (isDao) {
-            bitcoinString = '&#x00D0;' + bitcoinString.toFixed(2);
+            bitcoinString = '&#x00D0;' + bitcoins.toFixed(2);
         }
 
         this.div.style.zIndex = 10;
