@@ -19,6 +19,10 @@ function Transaction(bitcoins, highlight, hash, to, isContract, gas, currency, c
 		if (bitcoinString == "&Xi;0.00")
             bitcoinString = "<&Xi;0.01";
 
+        if (isDao) {
+            bitcoinString = '&#x00D0;' + bitcoinString.toFixed(2);
+        }
+
         this.div.style.zIndex = 10;
 	
 		if (highlight) {
